@@ -38,21 +38,21 @@ Copiar código
 pip install -r requirements.txt
 ```
 
-### 4. Configuração do Script
+### 4. Configuração do Arquivo de Configuração
+Antes de executar o script, é necessário configurar o arquivo de configuração. Siga as instruções abaixo:
+
+No diretório do projeto, localize o arquivo config-example.ini.
+Faça uma cópia deste arquivo e renomeie-a para config.ini.
+Edite o arquivo config.ini com suas próprias configurações do MySQL e Object Storage.
+Por exemplo:
+
+bash
+Copiar código
+cp config-example.ini config.ini
+Isso irá criar uma cópia do arquivo de exemplo como config.ini, que você pode então editar com suas configurações específicas.
+
 Edite o arquivo backup_mysql.py com as configurações corretas para o MySQL e o Object Storage. Você precisará fornecer as informações de conexão do seu MySQL local e as credenciais de acesso ao Object Storage.
 
-```python
-Copiar código
-# Configurações
-DB_HOST = "localhost"
-DB_USER = "seu_usuario"
-DB_PASS = "sua_senha"
-BACKUP_DIR = "/home/ow_py_mysqlbackup/backups"
-OBJECT_STORAGE_BUCKET = "ow-bk-db-01"
-OBJECT_STORAGE_URL = "https://usc1.contabostorage.com/ow-bk-db-01"
-AWS_ACCESS_KEY = "seu_access_key"
-AWS_SECRET_KEY = "seu_secret_key"
-```
 
 ### 5. Execução do Script
 Você pode executar o script manualmente para testar:

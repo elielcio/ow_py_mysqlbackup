@@ -54,3 +54,4 @@ venv.bak/
 
 # PyCharm
 .idea/
+config.ini

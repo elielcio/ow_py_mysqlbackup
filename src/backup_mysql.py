@@ -5,17 +5,32 @@ from datetime import datetime, timedelta
 import schedule
 import time
 import pymysql
+import configparser
+import sys
 
-# Configurações
-DB_HOST = "localhost"
-DB_USER = "seu_usuario"
-DB_PASS = "sua_senha"
-BACKUP_DIR = "/home/ow_py_mysqlbackup/backups"
-OBJECT_STORAGE_BUCKET = "ow-bk-db-01"
-OBJECT_STORAGE_URL = "https://usc1.contabostorage.com/ow-bk-db-01"
-AWS_ACCESS_KEY = "seu_access_key"
-AWS_SECRET_KEY = "seu_secret_key"
-IGNORED_DATABASES = {"information_schema", "performance_schema", "mysql", "sys"}
+# Verificar se o arquivo de configuração existe
+try:
+    with open('config.ini') as f:
+        pass
+except FileNotFoundError:
+    print("Erro: O arquivo de configuração 'config.ini' não foi encontrado.")
+    sys.exit(1)
+
+# Carregar configurações do arquivo config.ini
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+
+# Acessar configurações
+DB_HOST = config['mysql']['DB_HOST']
+DB_PORT = config.getint('mysql', 'DB_PORT', fallback=3306)  # Porta padrão 3306 se não estiver definida
+DB_USER = config['mysql']['DB_USER']
+DB_PASS = config['mysql']['DB_PASS']
+BACKUP_DIR = config['backup']['BACKUP_DIR']
+OBJECT_STORAGE_BUCKET = config['object_storage']['OBJECT_STORAGE_BUCKET']
+OBJECT_STORAGE_URL = config['object_storage']['OBJECT_STORAGE_URL']
+AWS_ACCESS_KEY = config['object_storage']['AWS_ACCESS_KEY']
+AWS_SECRET_KEY = config['object_storage']['AWS_SECRET_KEY']
 
 # Inicializa o cliente S3
 s3_client = boto3.client(
