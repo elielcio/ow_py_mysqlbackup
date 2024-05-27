@@ -163,20 +163,21 @@ backup_mysql()
 logging.info("Realizando Limpeza da pasta")
 print("Realizando Limpeza da pasta")
 cleanup_local_backups()
+cleanup_old_backups()
 
-print("Agendando limpeza diária dos backups locais...")
-schedule.every().day.at("00:00").do(cleanup_local_backups)
-print("Agendamento de limpeza de backups locais concluído.")
+# print("Agendando limpeza diária dos backups locais...")
+# schedule.every().day.at("00:00").do(cleanup_local_backups)
+# print("Agendamento de limpeza de backups locais concluído.")
 
-print(f"Agendando backups a cada {BACKUP_INTERVAL_MINUTES} minutos...")
-schedule.every(BACKUP_INTERVAL_MINUTES).minutes.do(backup_mysql)
-print("Agendamento de backups concluído.")
+# print(f"Agendando backups a cada {BACKUP_INTERVAL_MINUTES} minutos...")
+# schedule.every(BACKUP_INTERVAL_MINUTES).minutes.do(backup_mysql)
+# print("Agendamento de backups concluído.")
 
-print("Agendando limpeza diária dos backups...")
-schedule.every().day.at("00:00").do(cleanup_old_backups)
-print("Agendamento de limpeza concluído.")
+# print("Agendando limpeza diária dos backups...")
+# schedule.every().day.at("00:00").do(cleanup_old_backups)
+# print("Agendamento de limpeza concluído.")
 
 print("Executando a programação...")
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
